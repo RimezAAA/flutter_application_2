@@ -3,7 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_2/home.dart';
+import 'package:flutter_application_2/landing.dart';
+import 'package:flutter_application_2/services/services.dart';
 import 'package:flutter_application_2/test.dart';
+import 'package:provider/provider.dart';
 import 'auth.dart';
 
 void main() async {
@@ -19,15 +22,19 @@ class MyThemeApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      // home: AuthPage(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const AuthPage(),
-        '/home': (context) => HomePage(),
-        '/test':(context) => const TestWidget(),
-      },
+    return StreamProvider.value(
+      value: DbConnection().currentUser,
+      initialData: null,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        // home: AuthPage(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => LandingPage(),
+          '/home': (context) => HomePage(),
+          '/test':(context) => const TestWidget(),
+        },
+      ),
     );
   }
 }

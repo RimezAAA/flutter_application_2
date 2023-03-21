@@ -35,7 +35,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 IconButton(
                     onPressed: () {
                       dbConnection.logOut();
-                      Navigator.popAndPushNamed(context, '/');
+                      // Navigator.popAndPushNamed(context, '/');
                     },
                     icon: const Icon(
                       Icons.exit_to_app,
