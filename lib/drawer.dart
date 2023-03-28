@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_2/deal.dart';
 import 'package:flutter_application_2/services/services.dart';
 
 class MenuDrawer extends StatefulWidget {
@@ -53,7 +54,9 @@ class _MenuDrawerState extends State<MenuDrawer> {
               Icons.arrow_right,
               color: Colors.black,
             ),
-            onTap: () => {},
+            onTap: () => {
+              
+            },
           ),
           ListTile(
             leading: const Icon(

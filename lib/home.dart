@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_2/dbPage.dart';
 import 'package:flutter_application_2/drawer.dart';
 import 'package:flutter_application_2/pr3.dart';
 import 'calendar.dart';
@@ -65,9 +66,14 @@ class StateHomePage extends State<HomePage>{
       );
     }
 
+
+
+   
+
     final list = [
       listSearchWidget(context), // 0
-      const Calendar(), // 1
+      // const Calendar(), // 1
+      const dbPage(),
       const pr3Widget(), //2
     ];
     AppBar appBarSearch = AppBar(
