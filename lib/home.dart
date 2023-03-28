@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +22,7 @@ class StateHomePage extends State<HomePage>{
     List<Deal> newDealList = List.from(deals);
     TextEditingController titleDeal = TextEditingController();
     TextEditingController descriptionDeal = TextEditingController();
+    TextEditingController imgUrl = TextEditingController();
   onItemSearch(String value) {
     setState(
       () {
@@ -121,7 +123,7 @@ class StateHomePage extends State<HomePage>{
         appBar: tittleAppBar && selectedIndex == 0 ? appBarSearch : appBar,
         body: list.elementAt(selectedIndex),
         // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: selectedIndex == 0 ? FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () => showDialog(
             context: context,
@@ -170,7 +172,63 @@ class StateHomePage extends State<HomePage>{
           ],
         ),
           ),
+          ) : selectedIndex == 1 ? FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () => showDialog(
+              context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Добавить задачу'),
+          content: Container(
+            height: 180,
+            child: Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: "Заголовок",
+                    ),
+                  controller: titleDeal,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: "Описание",
+                  ),
+                  controller: descriptionDeal,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: "ссылка на картинку",
+                  ),
+                  controller: imgUrl,
+                ),
+              ],
+            ),
           ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async{ 
+                CollectionReference dealsDB = FirebaseFirestore.instance.collection('deal');
+                await dealsDB.add(
+                  {
+                    'title': titleDeal.text.toString(),
+                    'discription': descriptionDeal.text.toString(),
+                    'img': imgUrl.text.toString(),
+                  },
+                );
+                titleDeal.clear();
+                descriptionDeal.clear();
+                imgUrl.clear();
+                Navigator.pop(context, 'OK');
+                },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+            ),
+          ) : null,
       drawer: const MenuDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.amber,

@@ -6,6 +6,7 @@ class Deal{
   int? id;
   String? title;
   String? discription;
+  String? img;
   Deal({this.id, this.title, this.discription});
 }
 
