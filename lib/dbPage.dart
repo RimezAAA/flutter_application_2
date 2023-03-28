@@ -29,6 +29,7 @@ Widget build(BuildContext context){
             itemBuilder: (context, index) => buildList(
               context,
               snapShots.data.docs[index],
+              index,
             ),
           );
         }
@@ -38,7 +39,7 @@ Widget build(BuildContext context){
 }
 }
 
-Widget buildList(context,docs){
+Widget buildList(context,docs,index){
       return Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
@@ -52,7 +53,7 @@ Widget buildList(context,docs){
                 ),
                 tileColor: Colors.blueGrey[100],
                 leading: Text(
-                  "0"
+                  (index+1).toString()
                 ),
                 title: Text(docs['title']),
                 subtitle: Text(docs['discription']),
