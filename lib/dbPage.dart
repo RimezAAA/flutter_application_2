@@ -1,6 +1,7 @@
  import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/redDeal.dart';
 
 class dbPage extends StatefulWidget {
   const dbPage({super.key});
@@ -61,7 +62,17 @@ Widget buildList(context,docs,index){
                   Icons.arrow_right,
                   color: Colors.black,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, CupertinoPageRoute(
+                    builder: (context) => redactDeadPage(
+                      title: docs['title'],
+                      discription: docs['discription'],
+                      img: docs['img'],
+                      documentFirebase: docs,
+                    )
+                    )
+                  );
+                },
               ),
             );
     }
