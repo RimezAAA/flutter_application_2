@@ -72,17 +72,17 @@ class redactDeadPage extends StatelessWidget {
             label: "redaction",
           ),
         ],
-        onTap: (value) async{
+        onTap: (value){
           CollectionReference deal = FirebaseFirestore.instance.collection('deal');
           if (value == 0){
-            await deal.doc(documentFirebase.id).delete();
+             deal.doc(documentFirebase.id).delete();
             titleController.clear();
             discriptionController.clear();
             imgController.clear();
             Navigator.pop(context);
           }
           else if (value == 1){
-            await deal.doc(documentFirebase.id).update(
+             deal.doc(documentFirebase.id).update(
               {
                 'title': titleController.text,
                 'discription': discriptionController.text,

@@ -7,7 +7,8 @@ class Deal{
   String? title;
   String? discription;
   String? img;
-  Deal({this.id, this.title, this.discription});
+  dynamic firebase_id;
+  Deal({this.id, this.title, this.discription, this.img, this.firebase_id});
 }
 
 

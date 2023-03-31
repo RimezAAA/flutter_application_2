@@ -24,6 +24,7 @@ class StateHomePage extends State<HomePage>{
     TextEditingController descriptionDeal = TextEditingController();
     TextEditingController imgUrl = TextEditingController();
   onItemSearch(String value) {
+    if (selectedIndex == 0){
     setState(
       () {
         newDealList = deals
@@ -31,6 +32,7 @@ class StateHomePage extends State<HomePage>{
             .toList();
       }
     );
+    }
 }
 
   @override
@@ -108,7 +110,7 @@ class StateHomePage extends State<HomePage>{
       centerTitle: true,
       backgroundColor: Colors.amber,
       actions: [
-        if (selectedIndex == 0)
+        if (selectedIndex == 0 || selectedIndex == 1)
         IconButton(
             onPressed: () {
               setState(() {
@@ -120,7 +122,7 @@ class StateHomePage extends State<HomePage>{
     );
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: tittleAppBar && selectedIndex == 0 ? appBarSearch : appBar,
+        appBar: selectedIndex != 1 ? (tittleAppBar && selectedIndex == 0 ? appBarSearch : appBar) : null,
         body: list.elementAt(selectedIndex),
         // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: selectedIndex == 0 ? FloatingActionButton(
@@ -209,9 +211,9 @@ class StateHomePage extends State<HomePage>{
               child: const Text('Cancel'),
             ),
             TextButton(
-              onPressed: () async{ 
+              onPressed: () { 
                 CollectionReference dealsDB = FirebaseFirestore.instance.collection('deal');
-                await dealsDB.add(
+                 dealsDB.add(
                   {
                     'title': titleDeal.text.toString(),
                     'discription': descriptionDeal.text.toString(),
